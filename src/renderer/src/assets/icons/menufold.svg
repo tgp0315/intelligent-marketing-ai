@@ -1,0 +1,8 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="menu-icon/fold">
+<rect width="28" height="28" rx="2" transform="matrix(1 1.74846e-07 1.74846e-07 -1 0 28)" fill="#F7F8FA"/>
+<g id="direction/menu-fold">
+<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M20 17.6667L8 17.6667L8 19L20 19L20 17.6667ZM20 13.3333L13.3333 13.3333L13.3333 14.6667L20 14.6667L20 13.3333ZM8 9L20 9L20 10.3333L8 10.3333L8 9ZM10.7053 16.0005C10.9271 16.144 11.2198 15.9848 11.2198 15.7206L11.2198 12.4166C11.2198 12.1524 10.9271 11.9932 10.7053 12.1367L8.15225 13.7888C7.94925 13.9201 7.94925 14.2171 8.15225 14.3485L10.7053 16.0005Z" fill="#4E5969"/>
+</g>
+</g>
+</svg>
