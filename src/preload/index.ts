@@ -3,10 +3,13 @@ import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
-  windowMove: (status: boolean) => ipcRenderer.send('window-move-open', status),
+  windowMove: (content) => ipcRenderer.send('window-move-open', content),
   minimize: () => ipcRenderer.send('window-min'),
   maximize: () => ipcRenderer.send('window-max'),
-  close: () => ipcRenderer.send('window-close')
+  close: () => ipcRenderer.send('window-close'),
+  setStore: (key, value) => ipcRenderer.send('setStore', key, value),
+  getStore: (key) => ipcRenderer.invoke('getStore', key),
+  deleteStore: (key) => ipcRenderer.send('deleteStore', key)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

@@ -47,7 +47,11 @@ const { changeColorIndex, isCollapse } = storeToRefs(store)
 
 /**鼠标按压 */
 const mousedown = (e: Event) => {
-  if (e.target instanceof SVGElement) {
+  if (
+    e.target instanceof SVGElement ||
+    e.target instanceof HTMLDivElement ||
+    e.target instanceof HTMLSpanElement
+  ) {
     return
   }
   window.api.windowMove(true)
