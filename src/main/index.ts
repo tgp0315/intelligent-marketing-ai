@@ -5,14 +5,15 @@ import icon from '../../resources/icon.png?asset'
 
 import windowMove from './controler/windowMove'
 import windowSize from './controler/windowSize'
+import initStore from './controler/store'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 600,
-    minWidth: 900,
-    minHeight: 600,
+    width: 1000,
+    height: 700,
+    minWidth: 1000,
+    minHeight: 700,
     show: false,
     autoHideMenuBar: true,
     frame: false,
@@ -35,6 +36,7 @@ function createWindow(): void {
   })
   windowMove(mainWindow)
   windowSize(mainWindow)
+  initStore()
   // mainWindow.setResizable(false)
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
