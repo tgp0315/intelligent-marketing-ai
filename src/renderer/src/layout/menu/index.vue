@@ -8,7 +8,7 @@
   >
     <div class="profile_picture">
       <img
-        src="C:\Users\17795\Desktop\intelligent-marketing-ai\src\renderer\src\assets\icons\image.png"
+        src="../../assets/png/image.png"
         style="width: 48px; height: 48px; border-radius: 24px"
       />
       <div class="tip" />
