@@ -1,7 +1,8 @@
 export const initDom = () => {
   if (import.meta.env.MODE === 'development') {
-    document.onmousedown = (e) => {
+    document.onclick = (e) => {
       if (e.shiftKey && e.button === 0) {
+        console.log(11)
         e.preventDefault()
         sendRequestToOpenFileInEditor(getFilePath(e))
       }

@@ -17,7 +17,7 @@ function createWindow(): void {
     autoHideMenuBar: true,
     frame: false,
     transparent: true,
-    useContentSize: true,
+    useContentSize: false,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -35,6 +35,7 @@ function createWindow(): void {
   })
   windowMove(mainWindow)
   windowSize(mainWindow)
+  // mainWindow.setResizable(false)
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {

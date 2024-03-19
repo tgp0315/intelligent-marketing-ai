@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 // import { ref } from 'vue'
-import { useMenuStore } from '@/store/module/menu';
+import { useMenuStore } from '@/store/module/menu'
 const icons: Array<string> = ['zuixiaohua', 'zuidahua', 'guangbi']
 const store = useMenuStore()
 /**鼠标按压 */
@@ -42,7 +42,6 @@ const mousedown = (e: Event) => {
   if (e.target instanceof SVGElement) {
     return
   }
-  console.log(1)
   window.api.windowMove(true)
 }
 
@@ -107,7 +106,7 @@ const setMenuFold = () => {
       content: '';
       width: 1px;
       height: 22px;
-      background: #FFFFFF;
+      background: #ffffff;
       border-radius: 0px 0px 0px 0px;
       opacity: 1;
       margin-right: 24px;
@@ -120,9 +119,11 @@ const setMenuFold = () => {
   }
   .title {
     font-size: 16px;
-    font-family: PingFang SC-Medium, PingFang SC;
+    font-family:
+      PingFang SC-Medium,
+      PingFang SC;
     font-weight: 500;
-    color: #1D2129;
+    color: #1d2129;
   }
 }
 </style>
