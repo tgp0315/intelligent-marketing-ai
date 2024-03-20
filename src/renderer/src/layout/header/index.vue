@@ -43,17 +43,12 @@
 </template>
 
 <script setup lang="ts">
-// import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMenuStore } from '@/store/module/menu'
 const icons: Array<string> = ['zuixiaohua', 'zuidahua', 'guangbi']
 const store = useMenuStore()
 
 const { changeColorIndex, isCollapse } = storeToRefs(store)
-
-// const filterTitle = () => {
-//   return
-// }
 
 /**鼠标按压 */
 const mousedown = (e: Event) => {

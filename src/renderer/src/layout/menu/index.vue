@@ -2,8 +2,6 @@
   <el-menu
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
-    @open="handleOpen"
-    @close="handleClose"
     @select="selectMenu"
   >
     <div class="profile_picture">
@@ -52,19 +50,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useMenuStore } from '@/store/module/menu'
-// import { ref } from 'vue';
-// const isCollapse = ref(true)
 const store = useMenuStore()
 
-// const changeColorIndex = ref(1)
-
 const { isCollapse, changeColorIndex } = storeToRefs(store)
-// const handleOpen = (key: string, keyPath: string[]) => {
-//   console.log(key, keyPath)
-// }
-// const handleClose = (key: string, keyPath: string[]) => {
-//   console.log(key, keyPath)
-// }
 
 const selectMenu = (index: number) => {
   store.setChangeColorIndex(index)
