@@ -96,7 +96,10 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   if (isRemember.value) {
-    const data = encrypt(ruleForm)
+    const data = encrypt({
+      ...ruleForm,
+      isRemember: isRemember.value
+    })
     window.api.setStore('user', data)
   } else {
     window.api.deleteStore('user')
@@ -105,12 +108,12 @@ const resetForm = (formEl: FormInstance | undefined) => {
 
 const getInfo = async () => {
   const info = await window.api.getStore('user')
-  console.log(info, 'info')
   if (info) {
     const data = JSON.parse(decrypt(info))
     console.log(data, 'data')
     ruleForm.name = data.name
     ruleForm.password = data.password
+    isRemember.value = data.isRemember
   }
 }
 getInfo()
@@ -165,7 +168,7 @@ const mouseup = () => {
 
     .el-form {
       width: 333px;
-      height: 56px;
+      // height: 56px;
       font-size: 28px;
       font-weight: 600;
       color: #fff;
