@@ -39,4 +39,9 @@ body {
 .backgroundWhite {
   background: #F7F8FA;
   height: 100%;
+  padding: 20px 20px 0 20px;
+}
+
+.white {
+  background-color: #fff;
 }

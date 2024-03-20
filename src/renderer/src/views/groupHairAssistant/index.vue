@@ -1,6 +1,8 @@
 <template>
   <div class="backgroundWhite">
-    群发助手
+    <div class="white">
+      群发助手
+    </div>
   </div>
 </template>
 
