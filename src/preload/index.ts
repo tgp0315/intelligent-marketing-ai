@@ -1,8 +1,10 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-
+interface Api {
+  [prop: string]: any
+}
 // Custom APIs for renderer
-const api = {
+const api: Api = {
   windowMove: (content) => ipcRenderer.send('window-move-open', content),
   minimize: () => ipcRenderer.send('window-min'),
   maximize: () => ipcRenderer.send('window-max'),
@@ -15,6 +17,7 @@ const api = {
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
 // just add to the DOM global.
+console.log(process.contextIsolated, 'process.contextIsolated')
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)

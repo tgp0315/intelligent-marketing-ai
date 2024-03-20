@@ -79,7 +79,7 @@
     "mockjs": "^1.1.0",
     "prettier": "^3.2.4",
     "sass": "^1.72.0",
-    "typescript": "^5.3.3",
+    "typescript": "5.3.3",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
     "vite": "^5.0.12",

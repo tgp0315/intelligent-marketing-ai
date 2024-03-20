@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useMenuStore } from '@/store/module/menu'
-const icons: Array<string> = ['zuixiaohua', 'zuidahua', 'guangbi']
+const icons: Array<string> = ['zuixiaohua', 'zuidahua', 'close']
 const store = useMenuStore()
 
 const { changeColorIndex, isCollapse } = storeToRefs(store)

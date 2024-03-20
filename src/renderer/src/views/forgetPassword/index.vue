@@ -1,6 +1,6 @@
 <template>
   <div
-    class="login"
+    class="forgetPassword"
     @mousedown.prevent.stop="mousedown"
     @mouseup="mouseup"
   >
@@ -20,11 +20,10 @@
       <img
         class="img"
         src="../../assets/png/frame.png"
-        alt=""
       />
     </div>
     <div class="form">
-      <div class="title">账号登录</div>
+      <div class="title">忘记密码</div>
       <el-form
         ref="ruleFormRef"
         style="max-width: 600px"
@@ -34,36 +33,73 @@
         class="demo-ruleForm"
         :size="formSize"
       >
-        <el-form-item prop="name">
+        <el-form-item prop="email">
           <el-input
-            v-model="ruleForm.name"
+            v-model="ruleForm.email"
             :prefix-icon="Svguser"
-            placeholder="请输入账号"
+            placeholder="请输入电子邮箱账号"
+          />
+        </el-form-item>
+        <el-form-item
+          prop="code"
+          class="code"
+        >
+          <el-input
+            v-model="ruleForm.code"
+            :prefix-icon="Svgverification"
+            placeholder="请输入验证码"
+          />
+          <el-button
+            v-if="hasGetCode"
+            round
+            link
+            disabled
+            @click="getCode"
+          >
+            {{ count }}秒后重试
+          </el-button>
+          <el-button
+            v-else
+            type="primary"
+            round
+            @click="getCode"
+          >
+            获取验证码
+          </el-button>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            v-model="ruleForm.password"
+            type="password"
+            :prefix-icon="Svgunlock"
+            placeholder="请输入密码"
           />
         </el-form-item>
         <el-form-item prop="password">
           <el-input
             v-model="ruleForm.password"
+            type="password"
             :prefix-icon="Svgunlock"
-            placeholder="请输入密码"
-          />
-        </el-form-item>
-        <el-form-item class="remember">
-          <el-checkbox
-            v-model="isRemember"
-            label="记住密码"
-            size="large"
+            placeholder="确认密码"
           />
         </el-form-item>
         <el-form-item class="button">
+          <div class="accountNumber">
+            已有账号？去
+            <el-button
+              type="primary"
+              link
+              @click="goToLogin"
+            >
+              登录
+            </el-button>
+          </div>
           <el-button
-            type="primary"
-            link
-            @click="forgetPassword"
+            class="submit"
+            @click="submitForm(ruleFormRef)"
           >
-            忘记密码
+            确认
           </el-button>
-          <el-button @click="submitForm(ruleFormRef)"> 登录 </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -71,68 +107,64 @@
 </template>
 
 <script setup lang="ts">
-// import Svglogin from '@/assets/icons/login.svg?component'
 import Svguser from '@/assets/icons/user.svg'
 import Svgunlock from '@/assets/icons/unlock.svg'
-import { reactive, ref } from 'vue'
+import Svgverification from '@/assets/icons/verification.svg'
+import { onUnmounted, reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { encrypt, decrypt } from '@/utils/crypto'
 import { useRouter } from 'vue-router'
-const router = useRouter()
+import { message } from '@/utils/message'
 const icons = ['zuixiaohua', 'close']
-const key = encrypt('user')
+// eslint-disable-next-line no-useless-escape
+const reg = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/
+const router = useRouter()
 interface RuleForm {
-  name: string
+  email: string
   password: string
+  code: string
 }
-const isRemember = ref(false)
+const count = ref(60)
+const hasGetCode = ref(false)
 const formSize = ref('default')
+let timer: number | undefined = void 0
 const ruleFormRef = ref<FormInstance>()
 const ruleForm = reactive<RuleForm>({
-  name: '',
-  password: ''
+  email: '',
+  password: '',
+  code: ''
 })
 
+const validateEmail = (_rule: any, value: any, callback: any) => {
+  if (value === '') {
+    callback(new Error('请输入电子邮箱账号'))
+  } else {
+    if (!reg.test(value)) {
+      callback(new Error('请输入正确格式的电子邮箱账号'))
+    }
+    callback()
+  }
+}
+
 const rules = reactive<FormRules<RuleForm>>({
-  name: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+  email: [{ validator: validateEmail, trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+  code: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
 })
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      if (isRemember.value) {
-        const data = encrypt({
-          ...ruleForm,
-          isRemember: isRemember.value
-        })
-        window.api.setStore(key, data)
-      } else {
-        window.api.deleteStore(key)
-      }
-      router.replace('/staging')
+      router.replace('/home')
     } else {
       console.log('error submit!', fields)
     }
   })
 }
 
-const forgetPassword = () => {
-  router.replace('/forgetPassword')
+const goToLogin = () => {
+  router.replace('./login')
 }
-
-const getInfo = async () => {
-  const info = await window.api.getStore(key)
-  if (info) {
-    const data = JSON.parse(decrypt(info))
-    console.log(data, 'data')
-    ruleForm.name = data.name
-    ruleForm.password = data.password
-    isRemember.value = data.isRemember
-  }
-}
-getInfo()
 /**鼠标按压 */
 const mousedown = (e: Event) => {
   if (e.target instanceof SVGElement) {
@@ -146,6 +178,30 @@ const mouseup = () => {
   window.api.windowMove(false)
 }
 
+const getCode = () => {
+  if (!ruleForm.email) {
+    message('请输入电子邮箱账号', 'warning')
+    return
+  }
+
+  if (!reg.test(ruleForm.email)) {
+    message('请输入正确格式的电子邮箱账号', 'warning')
+    return
+  }
+  hasGetCode.value = true
+  timer = Number(
+    setInterval(() => {
+      if (count.value > 0 && count.value <= 60) {
+        count.value--
+      } else {
+        hasGetCode.value = false
+        clearInterval(timer)
+        timer = void 0
+      }
+    }, 1000)
+  )
+}
+
 const clickIcon = (type: string): void => {
   if (type === 'zuixiaohua') {
     window.api.minimize()
@@ -153,13 +209,18 @@ const clickIcon = (type: string): void => {
     window.api.close()
   }
 }
+
+onUnmounted(() => {
+  timer && clearInterval(timer)
+})
 </script>
 
 <style lang="scss">
-.login {
+.forgetPassword {
   height: 100%;
   width: 100%;
   display: flex;
+  position: relative;
 
   .control {
     position: absolute;
@@ -184,6 +245,11 @@ const clickIcon = (type: string): void => {
     }
   }
 
+  .accountNumber {
+    display: flex;
+    align-items: center;
+  }
+
   .form {
     flex: 2;
     background: linear-gradient(180deg, #81affe 0%, #5691fe 16%, #1b68ff 100%);
@@ -195,7 +261,7 @@ const clickIcon = (type: string): void => {
     .title {
       width: 333px;
       height: 56px;
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 600;
       color: #fff;
       line-height: 56px;
@@ -203,8 +269,6 @@ const clickIcon = (type: string): void => {
 
     .el-form {
       width: 333px;
-      // height: 56px;
-      font-size: 28px;
       font-weight: 600;
       color: #fff;
       line-height: 56px;
@@ -261,15 +325,17 @@ const clickIcon = (type: string): void => {
   }
 
   .is-link {
-    width: 64px;
-    height: 22px;
+    // width: 64px;
+    height: 14px;
     font-size: 14px;
     font-weight: 400;
     color: #ffffff;
     line-height: 19px;
+    margin-top: 2px;
+    border-bottom: 1px solid #fff;
   }
 
-  .el-button + .el-button {
+  .submit {
     background: #ffffff;
     box-shadow: 8px 13px 26px 0px rgba(45, 100, 234, 0.16);
     border-radius: 51px 51px 51px 51px;
@@ -280,6 +346,21 @@ const clickIcon = (type: string): void => {
       Alibaba PuHuiTi;
     font-weight: 400;
     color: #165dff;
+  }
+
+  .code {
+    position: relative;
+
+    .el-button--default {
+      position: absolute;
+      right: 2px;
+      box-shadow: 8px 13px 26px 0px rgba(45, 100, 234, 0.16);
+      border-radius: 51px 51px 51px 51px;
+
+      &.is_round {
+        background: #165dff;
+      }
+    }
   }
 }
 </style>
