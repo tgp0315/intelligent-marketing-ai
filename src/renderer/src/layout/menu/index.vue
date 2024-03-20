@@ -54,11 +54,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useMenuStore } from '@/store/module/menu';
-import {
-  Document,
-  Menu as IconMenu,
-  Setting,
-} from '@element-plus/icons-vue'
 // import { ref } from 'vue';
 // const isCollapse = ref(true)
 const store = useMenuStore()
