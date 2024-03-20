@@ -47,11 +47,11 @@
           <el-button
             type="primary"
             link
-            @click="submitForm(ruleFormRef)"
+            @click="forgetPassword"
           >
             忘记密码
           </el-button>
-          <el-button @click="resetForm(ruleFormRef)"> 登录 </el-button>
+          <el-button @click="submitForm(ruleFormRef)"> 登录 </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -65,6 +65,7 @@ import Svgunlock from '@/assets/icons/unlock.svg?component'
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { encrypt, decrypt } from '@/utils/crypto'
+const key = encrypt('user')
 interface RuleForm {
   name: string
   password: string
@@ -86,28 +87,25 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log('submit!')
+      if (isRemember.value) {
+        const data = encrypt({
+          ...ruleForm,
+          isRemember: isRemember.value
+        })
+        window.api.setStore(key, data)
+      } else {
+        window.api.deleteStore(key)
+      }
     } else {
       console.log('error submit!', fields)
     }
   })
 }
 
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  if (isRemember.value) {
-    const data = encrypt({
-      ...ruleForm,
-      isRemember: isRemember.value
-    })
-    window.api.setStore('user', data)
-  } else {
-    window.api.deleteStore('user')
-  }
-}
+const forgetPassword = () => {}
 
 const getInfo = async () => {
-  const info = await window.api.getStore('user')
+  const info = await window.api.getStore(key)
   if (info) {
     const data = JSON.parse(decrypt(info))
     console.log(data, 'data')
