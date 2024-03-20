@@ -12,9 +12,19 @@
         @click="setMenuFold"
       />
       <div class="current_menu">
-        <svg-icon :name="changeColorIndex === 1 ? 'console' : changeColorIndex === 2 ? 'myAccount' : 'groupHairAssistant'" />
+        <svg-icon
+          :name="
+            changeColorIndex === 1
+              ? 'console'
+              : changeColorIndex === 2
+                ? 'myAccount'
+                : 'groupHairAssistant'
+          "
+        />
         <span class="line">/</span>
-        <span class="title">{{ changeColorIndex === 1 ? '控制台' : changeColorIndex === 2 ? '我的账号' : '群发助手' }}</span>
+        <span class="title">{{
+          changeColorIndex === 1 ? '控制台' : changeColorIndex === 2 ? '我的账号' : '群发助手'
+        }}</span>
       </div>
     </div>
     <div class="button">
@@ -33,7 +43,6 @@
 </template>
 
 <script setup lang="ts">
-// import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useMenuStore } from '@/store/module/menu'
 const icons: Array<string> = ['zuixiaohua', 'zuidahua', 'guangbi']
@@ -41,17 +50,9 @@ const store = useMenuStore()
 
 const { changeColorIndex, isCollapse } = storeToRefs(store)
 
-// const filterTitle = () => {
-//   return
-// }
-
 /**鼠标按压 */
 const mousedown = (e: Event) => {
-  if (
-    e.target instanceof SVGElement ||
-    e.target instanceof HTMLDivElement ||
-    e.target instanceof HTMLSpanElement
-  ) {
+  if (e.target instanceof SVGElement || e.target instanceof HTMLSpanElement) {
     return
   }
   window.api.windowMove(true)
