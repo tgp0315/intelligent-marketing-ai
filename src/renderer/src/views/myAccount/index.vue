@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="backgroundWhite">
     我的账号
   </div>
 </template>
@@ -9,5 +9,6 @@
 </script>
 
 <style lang="scss" scoped>
+
 
 </style>

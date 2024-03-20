@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="backgroundWhite">
     工作台
   </div>
 </template>

@@ -102,12 +102,16 @@ const setMenuFold = () => {
 
   .icon {
     margin-right: 12px;
+    cursor: pointer;
   }
 
   .collapse {
     display: flex;
     align-items: center;
     margin: 0 24px;
+    .collapse_btn {
+      cursor: pointer;
+    }
   }
 
   .current_menu {

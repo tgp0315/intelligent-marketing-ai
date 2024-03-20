@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="backgroundWhite">
     群发助手
   </div>
 </template>
