@@ -116,7 +116,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       } else {
         window.api.deleteStore(key)
       }
-      router.replace('/staging')
+      router.replace('/workbench')
     } else {
       console.log('error submit!', fields)
     }

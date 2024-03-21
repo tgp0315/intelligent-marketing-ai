@@ -4,14 +4,27 @@
     <meta charset="UTF-8" />
     <title>Electron</title>
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- <meta name="viewport" content="initial-scale=1.0,user-scalable=no" /> -->
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
     />
   </head>
-
+  <script>
+    (function(){
+      console.log(window.devicePixelRatio, 'window.devicePixelRatio')
+      var scale = 1 / window.devicePixelRatio;
+      var meta = document.createElement("meta");
+      meta.name = "viewport";
+      meta.content = "width=device-width,initial-scale="+scale+",minimum-scale="+scale+",maximum-scale="+scale;
+      document.head.appendChild(meta);
+    })();
+  </script>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
+<script>
+
+</script>

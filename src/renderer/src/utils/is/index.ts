@@ -8,6 +8,13 @@ export function is(val: unknown, type: string) {
 }
 
 /**
+ * @description:  是否为函数
+ */
+export function isFunction<T = () => void>(val: unknown): val is T {
+  return is(val, 'Function')
+}
+
+/**
  * @description: 是否已定义
  */
 export const isDef = <T = unknown>(val?: T): val is T => {

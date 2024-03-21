@@ -29,17 +29,8 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`)
   <svg
     class="svg-icon"
     aria-hidden="true"
-    :style="{ width: props.iconStyle?.width + 'px', height: props.iconStyle?.height + 'px' }"
+    :style="{ width: iconStyle?.width + 'px', height: iconStyle?.height + 'px' }"
   >
     <use :href="symbolId" />
   </svg>
 </template>
-
-<style lang="scss" scoped>
-.svg-icon {
-  // width: 1em;
-  // height: 1em;
-  // fill: currentColor;
-  // overflow: hidden;
-}
-</style>

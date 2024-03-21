@@ -23,7 +23,7 @@
         />
         <span class="line">/</span>
         <span class="title">{{
-          changeColorIndex === 1 ? '控制台' : changeColorIndex === 2 ? '我的账号' : '群发助手'
+          changeColorIndex === 1 ? '工作台' : changeColorIndex === 2 ? '我的账号' : '群发助手'
         }}</span>
       </div>
     </div>

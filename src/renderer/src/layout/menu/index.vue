@@ -8,7 +8,7 @@
       <img
         src="../../assets/png/image.png"
         style="width: 48px; height: 48px; border-radius: 24px"
-      >
+      />
       <div class="tip" />
     </div>
     <el-menu-item
@@ -22,7 +22,7 @@
         />
       </div>
       <template #title>
-        <span :class="{ menu_font: true, active_font: changeColorIndex === 1 }">控制台</span>
+        <span :class="{ menu_font: true, active_font: changeColorIndex === 1 }">工作台</span>
       </template>
     </el-menu-item>
     <el-menu-item
