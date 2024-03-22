@@ -11,7 +11,10 @@
       />
       <div class="tip" />
     </div>
-    <el-menu-item index="1">
+    <el-menu-item
+      index="1"
+      @click="routerSwitch('staging')"
+    >
       <div :class="{ blue_box: true, active_blue: changeColorIndex === 1 }">
         <svg-icon
           name="console"
@@ -19,10 +22,13 @@
         />
       </div>
       <template #title>
-        <span :class="{ menu_font: true, active_font: changeColorIndex === 1 }">控制台</span>
+        <span :class="{ menu_font: true, active_font: changeColorIndex === 1 }">工作台</span>
       </template>
     </el-menu-item>
-    <el-menu-item index="2">
+    <el-menu-item
+      index="2"
+      @click="routerSwitch('myAccount')"
+    >
       <div :class="{ blue_box: true, active_blue: changeColorIndex === 2 }">
         <svg-icon
           name="myAccount"
@@ -33,7 +39,10 @@
         <span :class="{ menu_font: true, active_font: changeColorIndex === 2 }">我的账号</span>
       </template>
     </el-menu-item>
-    <el-menu-item index="3">
+    <el-menu-item
+      index="3"
+      @click="routerSwitch('groupHairAssistant')"
+    >
       <div :class="{ blue_box: true, active_blue: changeColorIndex === 3 }">
         <svg-icon
           name="groupHairAssistant"
@@ -50,13 +59,21 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useMenuStore } from '@/store/module/menu'
+import { useRouter } from 'vue-router'
 const store = useMenuStore()
+const router = useRouter()
 
 const { isCollapse, changeColorIndex } = storeToRefs(store)
 
 const selectMenu = (index: number) => {
   store.setChangeColorIndex(index)
 }
+
+const routerSwitch = (route: string) => {
+  router.push(route)
+}
+
+// const
 </script>
 
 <style lang="scss">

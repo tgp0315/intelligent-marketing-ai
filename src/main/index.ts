@@ -10,9 +10,9 @@ import initStore from './controler/store'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1000,
+    width: 1100,
     height: 700,
-    minWidth: 1000,
+    minWidth: 1100,
     minHeight: 700,
     show: false,
     autoHideMenuBar: true,
