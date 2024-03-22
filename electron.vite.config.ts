@@ -36,7 +36,7 @@ export default defineConfig({
         gvaPositionServer(),
         gvaPosition(),
         vue(),
-        svgLoader({ defaultImport: 'url' }),
+        svgLoader(),
         // * 使用 svg 图标
         createSvgIconsPlugin({
           iconDirs: [resolve(process.cwd(), 'src/renderer/src/assets/icons')],

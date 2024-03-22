@@ -23,7 +23,7 @@
         />
         <span class="line">/</span>
         <span class="title">{{
-          changeColorIndex === 1 ? '控制台' : changeColorIndex === 2 ? '我的账号' : '群发助手'
+          changeColorIndex === 1 ? '工作台' : changeColorIndex === 2 ? '我的账号' : '群发助手'
         }}</span>
       </div>
     </div>
@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useMenuStore } from '@/store/module/menu'
-const icons: Array<string> = ['zuixiaohua', 'zuidahua', 'guangbi']
+const icons: Array<string> = ['zuixiaohua', 'zuidahua', 'close']
 const store = useMenuStore()
 
 const { changeColorIndex, isCollapse } = storeToRefs(store)

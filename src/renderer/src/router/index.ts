@@ -8,13 +8,13 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/home',
     name: 'home',
-    redirect: "/staging",
+    redirect: '/workbench',
     component: () => import('@/layout/index.vue'),
     children: [
       {
-        path: '/staging',
-        name: 'staging',
-        component: () => import('@/views/staging/index.vue')
+        path: '/workbench',
+        name: 'workbench',
+        component: () => import('@/views/workbench/index.vue')
       },
       {
         path: '/myAccount',
@@ -32,6 +32,11 @@ const routes: RouteRecordRaw[] = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/login/index.vue')
+  },
+  {
+    path: '/forgetPassword',
+    name: 'forgetPassword',
+    component: () => import('@/views/forgetPassword/index.vue')
   }
 ]
 

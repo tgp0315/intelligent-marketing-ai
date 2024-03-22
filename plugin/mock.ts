@@ -13,19 +13,18 @@ const viteMockPlugin = (options: Options = {}): Plugin => {
     name: 'vite-mock-plugin',
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
+        // console.log(req.headers, 'headers')
         const method = req.headers.method
         if (method) {
-          let route: string = path.resolve(process.cwd(), options.entry as string, `${method}.ts`)
-          const cacheRoute = route.replace(/\\/g, '\\')
+          let route: string = path.resolve(process.cwd(), options.entry as string, `${method}.js`)
           route = route.replace(/\\/g, '/')
           try {
             const isExist = await isFileExisted(route)
             if (isExist) {
-              delete require.cache[cacheRoute]
               // eslint-disable-next-line @typescript-eslint/no-var-requires
-              const content = require(route)
+              const content = await import(`file://${route}`)
               if (content) {
-                const chunk = send(content)
+                const chunk = send(content.default)
                 res.statusCode = 200
                 res.setHeader('Content-Type', 'application/json')
                 res.end(chunk)

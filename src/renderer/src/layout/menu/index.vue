@@ -13,7 +13,7 @@
     </div>
     <el-menu-item
       index="1"
-      @click="routerSwitch('staging')"
+      @click="routerSwitch('workbench')"
     >
       <div :class="{ blue_box: true, active_blue: changeColorIndex === 1 }">
         <svg-icon
@@ -22,7 +22,7 @@
         />
       </div>
       <template #title>
-        <span :class="{ menu_font: true, active_font: changeColorIndex === 1 }">控制台</span>
+        <span :class="{ menu_font: true, active_font: changeColorIndex === 1 }">工作台</span>
       </template>
     </el-menu-item>
     <el-menu-item

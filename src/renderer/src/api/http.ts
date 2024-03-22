@@ -4,7 +4,8 @@ import { ResultEnum } from './enums/httpEnum'
 import { checkStatus } from './helper/checkStatus'
 import { AxiosCanceler } from './helper/axiosCancel'
 import { message } from '@/utils/message'
-
+import { encrypt } from '@/utils/crypto'
+const key = encrypt('token')
 const axiosCanceler = new AxiosCanceler()
 
 const config = {
@@ -27,15 +28,23 @@ class RequestHttp {
      * token校验(JWT) : 接受服务器返回的token,存储到redux/本地储存当中
      */
     this.service.interceptors.request.use(
-      (config: AxiosRequestConfig): any => {
+      async (config: AxiosRequestConfig): Promise<any> => {
         // NProgress.start()
         // * 将当前请求添加到 pending 中
         axiosCanceler.addPending(config)
         // * 如果当前请求不需要显示 loading,在api服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
         // config.headers!.noLoading || showFullScreenLoading()
         // const token: string = store.getState().global.token
-        const token = ''
-        return { ...config, headers: { ...config.headers, 'x-access-token': token } }
+        const token = await window.api.getStore(key)
+        const method: string = config.url?.split('/').join('.') as string
+        return {
+          ...config,
+          headers: {
+            ...config.headers,
+            'x-access-token': token,
+            method: method.substring(1)
+          }
+        }
       },
       (error: AxiosError) => {
         return Promise.reject(error)
