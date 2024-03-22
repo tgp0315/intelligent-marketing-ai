@@ -131,7 +131,7 @@ const mouseup = () => {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .login {
   height: 100%;
   width: 100%;
