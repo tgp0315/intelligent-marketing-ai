@@ -10,7 +10,6 @@
       :label="item.label"
       :name="item.key"
     >
-      <!-- {{ item.component }} -->
       <component :is="item.component" />
     </el-tab-pane>
   </el-tabs>
@@ -40,10 +39,18 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     color: #6b778c;
     font-size: 32px;
     font-weight: 600;
+    background: #fff;
+    flex: 1;
   }
 
   .el-tabs__header {
     margin: 0;
+    background: #fff;
+    height: 39px;
+  }
+
+  .el-tab-pane {
+    height: 100%;
   }
 }
 </style>

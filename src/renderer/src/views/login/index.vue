@@ -78,7 +78,6 @@ import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { encrypt, decrypt } from '@/utils/crypto'
 import { useRouter } from 'vue-router'
-import { test } from '@/api/module'
 const router = useRouter()
 const icons = ['zuixiaohua', 'close']
 const key = encrypt('user')
@@ -98,11 +97,6 @@ const rules = reactive<FormRules<RuleForm>>({
   name: [{ required: true, message: '请输入账号', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
-const a = async () => {
-  const data = await test()
-  console.log(data, 'data')
-}
-a()
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
