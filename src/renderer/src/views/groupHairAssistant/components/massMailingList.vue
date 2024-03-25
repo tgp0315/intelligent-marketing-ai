@@ -127,7 +127,10 @@
       </div>
     </div>
     <div class="bottom">
-      <el-button color="#165DFF">
+      <el-button
+        color="#165DFF"
+        @click="dialogVisibleTemplate = true"
+      >
         选择话术模板
       </el-button>
       <el-button color="#94BFFF">
@@ -217,8 +220,8 @@
         >
           <el-form-item label="营销任务名称">
             <el-input
-              style="width: 440px;"
               v-model="name"
+              style="width: 440px;"
               placeholder="请输入关键字"
               clearable
             />
@@ -230,6 +233,100 @@
           <el-button
             color="#F2F3F5"
             @click="dialogVisibleAccount = false"
+          >
+            取消
+          </el-button>
+          <el-button
+            color="#165DFF"
+            @click="onSubmitConfig"
+          >
+            确认
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+    <el-dialog
+      v-if="dialogVisibleTemplate"
+      v-model="dialogVisibleTemplate"
+      width="960px"
+      top="15%"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false"
+      :show-close="false"
+    >
+      <template #header>
+        <div class="my-header">
+          <div class="dialogTitle">
+            选择话术模板
+          </div>
+          <svg-icon
+            name="closeCircle"
+            :icon-style="{ width: 25, height: 25 }"
+            @click="dialogVisibleTemplate = false"
+          />
+        </div>
+      </template>
+      <div style="margin: 10px 0 0px 0;">
+        <el-table
+          ref="multipleTableRef"
+          :data="tableData"
+          style=" width: 100%;"
+          max-height="350px"
+          :header-cell-style="{backgroundColor: '#F2F3F5', color: '#1D2129'}"
+        >
+          <el-table-column
+            label="内容"
+            property="content"
+            min-width="230"
+          />
+          <el-table-column
+            property="pic"
+            label="图片/视频"
+            min-width="230"
+          />
+          <el-table-column
+            property="account"
+            label="名片账号"
+            min-width="230"
+          />
+          <el-table-column
+            fixed="right"
+            label="操作"
+            min-width="230"
+          >
+            <template #default="scope">
+              <el-button
+                link
+                type="primary"
+                size="small"
+                @click.prevent="selectAccount(scope.row.id)"
+              >
+                选用
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="flexRight">
+          <el-pagination
+            v-model:current-page="currentPage"
+            v-model:page-size="pageSize"
+            small
+            background
+            :teleported="false"
+            popper-class="select_bottom"
+            :page-sizes="[10, 20, 30, 40]"
+            layout="total, sizes, prev, pager, next"
+            :total="total"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+          />
+        </div>
+      </div>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button
+            color="#F2F3F5"
+            @click="dialogVisibleTemplate = false"
           >
             取消
           </el-button>
@@ -254,6 +351,60 @@ import { Plus } from '@element-plus/icons-vue'
 const infoList = ref([])
 const radio1 = ref('1')
 const dialogVisibleAccount = ref(false)
+const dialogVisibleTemplate = ref(false)
+const currentPage = ref(1)
+const pageSize = ref(100)
+const total = ref(100)
+
+const tableData = ref([
+  {
+    content: 'XXxxxxxxxxxxxxxxxxxxxxxxx',
+    pic: '',
+    account: '15896487531',
+  },
+  {
+    content: 'XXxxxxxxxxxxxxxxxxxxxxxxx',
+    pic: '',
+    account: '15896487531',
+  },
+  {
+    content: 'XXxxxxxxxxxxxxxxxxxxxxxxx',
+    pic: '',
+    account: '15896487531',
+  },
+  {
+    content: 'XXxxxxxxxxxxxxxxxxxxxxxxx',
+    pic: '',
+    account: '15896487531',
+  },
+  {
+    content: 'XXxxxxxxxxxxxxxxxxxxxxxxx',
+    pic: '',
+    account: '15896487531',
+  },
+  {
+    content: 'XXxxxxxxxxxxxxxxxxxxxxxxx',
+    pic: '',
+    account: '15896487531',
+  },
+  {
+    content: 'XXxxxxxxxxxxxxxxxxxxxxxxx',
+    pic: '',
+    account: '15896487531',
+  },
+  {
+    content: 'XXxxxxxxxxxxxxxxxxxxxxxxx',
+    pic: '',
+    account: '15896487531',
+  },
+  {
+    content: 'XXxxxxxxxxxxxxxxxxxxxxxxx',
+    pic: '',
+    account: '15896487531',
+  }
+])
+
+
 const leftTableData = ref([
   {
     accountInfo: 'left-1张*三',
@@ -366,19 +517,23 @@ const onSubmitConfig = () => {
   console.log('提交');
 
 }
+// 选用
+const selectAccount = () => {
+
+}
+
+const handleSizeChange = () => {
+
+}
+
+const handleCurrentChange = () => {
+
+}
 //--------------------------富文本-------------------------------
 
 const editorRef = shallowRef()
 // 内容 HTML
 const valueHtml = ref('<p></p>')
-
-
-// onMounted(() => {
-  // const toolbar = DomEditor.getToolbar(editorRef.value)
-  // const curToolbarConfig = toolbar.getConfig()
-  // console.log( curToolbarConfig.toolbarKeys )
-
-// })
 onMounted(() => {
         setTimeout(() => {
           const toolbar = DomEditor.getToolbar(editorRef.value)
@@ -559,5 +714,16 @@ onBeforeUnmount(() => {
   :deep(.el-dialog__body) {
     border-bottom: 1px solid #E5E6EB !important;
   }
+
+  .flexRight {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 0;
+  .el-pagination {
+    // width: 400px;
+    // zoom: 1;
+  }
+}
+
 }
 </style>
