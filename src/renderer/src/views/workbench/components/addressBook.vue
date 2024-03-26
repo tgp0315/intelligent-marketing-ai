@@ -1,6 +1,5 @@
-// 会话
 <template>
-  <div class="dialogue">
+  <div class="addressBook">
     <el-input
       v-model="value"
       style="width: 290px"
@@ -35,11 +34,6 @@
                 :class="{ selected: activeNames.includes(item.account) }"
                 >{{ item.account }}</span
               >
-              <span
-                v-if="item.unread"
-                class="unread"
-                >{{ item.unread }}</span
-              >
             </div>
             <svg-icon
               :icon-style="iconStyle"
@@ -60,13 +54,8 @@
                   src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
                 />
                 <div class="user">
-                  <span class="name">{{ info.nickname }}</span>
-                  <span class="message">{{ info.latestMessage }}</span>
+                  {{ info.nickname }}
                 </div>
-              </div>
-              <div class="other">
-                <span class="time">{{ info.timeStamp }}</span>
-                <span class="unread">{{ info.unread }}</span>
               </div>
             </div>
           </template>
@@ -100,40 +89,28 @@ const accountList = reactive([
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       },
       {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       },
       {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       },
       {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       }
     ]
@@ -141,66 +118,47 @@ const accountList = reactive([
   {
     account: 'flb1117@gmail.com',
     isCollapse: false,
-    unread: 1,
     children: [
       {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       },
       {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       },
       {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       },
       {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       },
       {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       },
       {
         avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         account: 'flb1116@gmail.com',
         nickname: '张三',
-        latestMessage: '卧室真大',
-        unread: 1,
         isSelected: false,
-        timeStamp: 1711078211014,
         chatId: 1711078211014
       }
     ]
@@ -232,7 +190,7 @@ const clickAll = () => {
 </script>
 
 <style lang="scss">
-.dialogue {
+.addressBook {
   width: 100%;
   height: 100%;
   display: flex;
@@ -357,22 +315,12 @@ const clickAll = () => {
     align-items: center;
 
     .user {
+      color: #2c2c2c;
       margin-left: 10px;
       display: flex;
       flex-direction: column;
       font-weight: 400;
       font-size: 16px;
-    }
-
-    .name {
-      color: #2c2c2c;
-      line-height: 22px;
-      margin-bottom: 6px;
-    }
-
-    .message {
-      color: #9f9f9f;
-      line-height: 22px;
     }
   }
   .other {
