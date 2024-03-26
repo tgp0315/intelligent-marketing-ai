@@ -3,7 +3,7 @@
   <div class="dialogue">
     <el-input
       v-model="value"
-      style="width: 300px"
+      style="width: 290px"
       placeholder="请输入关键词"
       :suffix-icon="Search"
     />

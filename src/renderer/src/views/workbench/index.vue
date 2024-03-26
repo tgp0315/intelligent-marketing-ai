@@ -15,7 +15,13 @@ import dialogue from './components/dialogue.vue'
 import addressBook from './components/addressBook.vue'
 import group from './components/group.vue'
 import FunctionalDomain from './components/functionalDomain.vue'
-const tabList = [
+import { Component } from 'vue'
+interface TabList {
+  key: string
+  label: string
+  component: Component | string
+}
+const tabList: TabList[] = [
   {
     key: 'huihua',
     label: '会话',
@@ -42,7 +48,7 @@ const tabList = [
   height: calc(100vh - 60px);
 
   .message_tabs {
-    width: 340px;
+    width: 320px;
     height: 100%;
     border: 1px solid #e8e8e8;
     display: flex;
@@ -52,7 +58,7 @@ const tabList = [
 
     .el-tabs__item {
       // width: 112px;
-      margin-left: 38px;
+      margin-left: 35px;
       &.is-active {
         font-weight: 600;
       }

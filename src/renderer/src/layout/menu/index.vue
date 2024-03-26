@@ -13,7 +13,7 @@
     </div>
     <el-menu-item
       index="1"
-      @click="routerSwitch('staging')"
+      @click="routerSwitch('workbench')"
     >
       <div :class="{ blue_box: true, active_blue: changeColorIndex === 1 }">
         <svg-icon

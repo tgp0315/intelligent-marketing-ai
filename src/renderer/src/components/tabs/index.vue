@@ -15,16 +15,15 @@
   </el-tabs>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { Component, ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
 interface Params {
   key: string
   label: string
-  name: string
-  component: string
+  component: string | Component
 }
 interface Props {
-  tabList: Array<Params>
+  tabList: Params[]
 }
 const props = defineProps<Props>()
 const activeName = ref(props.tabList[0].key)

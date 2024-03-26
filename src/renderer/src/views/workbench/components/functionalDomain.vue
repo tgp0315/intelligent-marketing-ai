@@ -7,19 +7,25 @@
 
 <script setup lang="ts">
 import Tabs from '@/components/tabs/index.vue'
-import dialogue from './dialogue.vue'
-import addressBook from './addressBook.vue'
+import frequently from './frequently.vue'
+import CustomerInfo from './customerInfo.vue'
 import group from './group.vue'
-const tabList = [
+import { Component } from 'vue'
+interface TabList {
+  key: string
+  label: string
+  component: string | Component
+}
+const tabList: TabList[] = [
   {
     key: 'huihua',
     label: '常用功能',
-    component: dialogue
+    component: frequently
   },
   {
     key: 'tongxunlu',
     label: '客户信息',
-    component: addressBook
+    component: CustomerInfo
   },
   {
     key: 'qunzu',
@@ -31,14 +37,32 @@ const tabList = [
 
 <style lang="scss">
 .functionalDomain {
-  width: 415px;
+  width: 400px;
   background: #fff;
+  height: 100%;
+
+  .el-tabs {
+    height: 100%;
+    width: 100%;
+  }
 
   .el-tabs__item {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 22px;
-    margin-left: 22px;
+    margin-left: 26px;
+  }
+
+  .el-tabs__nav-wrap.is-scrollable {
+    padding: 0 19px;
+  }
+
+  .el-tabs__header {
+    height: 60px;
+  }
+
+  .el-tabs__item {
+    height: 60px;
   }
 }
 </style>
