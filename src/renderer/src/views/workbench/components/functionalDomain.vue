@@ -10,7 +10,7 @@ import Tabs from '@/components/tabs/index.vue'
 import frequently from './frequently.vue'
 import CustomerInfo from './customerInfo.vue'
 import group from './group.vue'
-import { Component } from 'vue'
+import type { Component } from 'vue'
 interface TabList {
   key: string
   label: string

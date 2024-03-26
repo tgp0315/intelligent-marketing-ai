@@ -15,7 +15,7 @@ import dialogue from './components/dialogue.vue'
 import addressBook from './components/addressBook.vue'
 import group from './components/group.vue'
 import FunctionalDomain from './components/functionalDomain.vue'
-import { Component } from 'vue'
+import type { Component } from 'vue'
 interface TabList {
   key: string
   label: string

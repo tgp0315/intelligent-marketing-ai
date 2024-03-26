@@ -15,7 +15,8 @@
   </el-tabs>
 </template>
 <script lang="ts" setup>
-import { Component, ref } from 'vue'
+import { ref } from 'vue'
+import type { Component } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
 interface Params {
   key: string
