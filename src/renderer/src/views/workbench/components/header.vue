@@ -117,7 +117,7 @@ interface Props {
 defineProps<Props>()
 const isOpen = ref(false)
 const language = ref('英语')
-const recordVisible = ref(true)
+const recordVisible = ref(false)
 const formSize = ref('default')
 interface RecordForm {
   content: string
