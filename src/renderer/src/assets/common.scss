@@ -1,0 +1,26 @@
+@mixin scrollBar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: #ccc;
+  }
+
+  &:hover::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@mixin buttonStyle {
+  background: #165dff;
+  border-radius: 8px 8px 8px 8px;
+}
+
+$textareaBgColor: #f2f3f5

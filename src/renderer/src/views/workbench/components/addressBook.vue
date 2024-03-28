@@ -236,14 +236,7 @@ const clickAll = () => {
     height: 100%;
     overflow: auto;
 
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 5px;
-    }
+    @include scrollBar;
   }
 
   .el-collapse-item__content {

@@ -75,16 +75,14 @@
           :rows="2"
           placeholder="请输入群组名称"
         />
-        <el-button type="primary">
-          添加群组
-        </el-button>
+        <el-button type="primary"> 添加群组 </el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { reactive, ref } from 'vue'
 
 const confirmName = ref('')
 const clientList = reactive([
@@ -102,7 +100,8 @@ const clientList = reactive([
     id: 1,
     account: '客户账号a',
     content: '客户来源描述'
-  },{
+  },
+  {
     id: 1,
     account: '客户账号a',
     content: '客户来源描述'
@@ -149,7 +148,7 @@ const cellClassName = ({ columnIndex }) => {
   .el-table__header-wrapper {
     display: none;
   }
-    .el-table td.el-table__cell,
+  .el-table td.el-table__cell,
   .el-table th.el-table__cell.is-leaf {
     border: none;
   }
@@ -205,12 +204,13 @@ const cellClassName = ({ columnIndex }) => {
 
     .el-button--primary {
       margin-left: 20px;
+      @include buttonStyle;
     }
   }
 
   .el-input__wrapper {
     box-shadow: none;
-    background-color: #F2F3F5;
+    background-color: #f2f3f5;
   }
 }
 </style>

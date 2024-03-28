@@ -95,19 +95,13 @@
             </span>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item command="en">
-                  英语
-                </el-dropdown-item>
-                <el-dropdown-item command="cn">
-                  中文
-                </el-dropdown-item>
+                <el-dropdown-item command="en"> 英语 </el-dropdown-item>
+                <el-dropdown-item command="cn"> 中文 </el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
         </div>
-        <el-button type="primary">
-          翻&nbsp;&nbsp;译
-        </el-button>
+        <el-button type="primary"> 翻&nbsp;&nbsp;译 </el-button>
       </div>
       <el-input
         v-model="translation"
@@ -128,9 +122,7 @@
           disabled
           placeholder="请输入手机号"
         />
-        <el-button type="primary">
-          确&nbsp;&nbsp;定
-        </el-button>
+        <el-button type="primary"> 确&nbsp;&nbsp;定 </el-button>
       </div>
     </div>
     <el-dialog
@@ -168,9 +160,7 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="closeDialog('分类')">
-          取消
-        </el-button>
+        <el-button @click="closeDialog('分类')"> 取消 </el-button>
         <el-button
           type="primary"
           @click="submitForm('分类')"
@@ -237,9 +227,7 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="closeDialog('添加话术')">
-          取消
-        </el-button>
+        <el-button @click="closeDialog('添加话术')"> 取消 </el-button>
         <el-button
           type="primary"
           @click="submitSpeechForm('添加话术')"
@@ -270,7 +258,7 @@
       <div class="center">
         <el-button
           type="primary"
-          style="margin-bottom: 15px;"
+          style="margin-bottom: 15px"
         >
           下载模板
         </el-button>
@@ -285,16 +273,12 @@
           :on-change="changeFile"
         >
           <template #trigger>
-            <el-button type="primary">
-              选择文件
-            </el-button>
+            <el-button type="primary"> 选择文件 </el-button>
           </template>
         </el-upload>
       </div>
       <template #footer>
-        <el-button @click="closeDialog('导入话术')">
-          取消
-        </el-button>
+        <el-button @click="closeDialog('导入话术')"> 取消 </el-button>
         <el-button
           type="primary"
           @click="submitUpload('导入话术')"
@@ -345,7 +329,7 @@ interface RuleForm {
 }
 
 interface SpeechForm {
-  type: number,
+  type: number
   content: string
 }
 
@@ -458,7 +442,7 @@ const submitSpeechForm = async (type: string) => {
 const changeFile = (file) => {
   const dataFile = new FormData()
   dataFile.append('file', file.raw)
-  console.log(file.raw, fileList, dataFile);
+  console.log(file.raw, fileList, dataFile)
 }
 
 const submitUpload = (type: string) => {
@@ -582,14 +566,7 @@ const selected = (index, row) => {
     max-height: 217px;
     overflow: auto;
 
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 5px;
-    }
+    @include scrollBar;
   }
 
   .verbaltrick_btn {
@@ -605,10 +582,12 @@ const selected = (index, row) => {
   }
 
   .el-textarea__inner {
-    background: #f2f3f5;
+    background: $textareaBgColor;
     border-radius: 8px 8px 8px 8px;
     height: 76px;
     box-shadow: 0 0 0 0px !important;
+
+    @include scrollBar;
   }
 
   .action {
@@ -635,8 +614,7 @@ const selected = (index, row) => {
   }
 
   .el-button--primary {
-    background: #165dff;
-    border-radius: 8px 8px 8px 8px;
+    @include buttonStyle;
 
     &.is-link {
       background: transparent;
@@ -650,12 +628,20 @@ const selected = (index, row) => {
 
     .el-button--primary {
       margin-left: 20px;
+      @include buttonStyle;
     }
   }
 }
 
+.el-overlay-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .workspace_dialog {
   padding: 0 0 16px 0;
+
   .center {
     text-align: center;
   }
@@ -684,18 +670,12 @@ const selected = (index, row) => {
     border-bottom: 1px solid #e5e6eb;
   }
 
-  .el-overlay-dialog {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .el-dialog__footer {
     padding-right: 20px;
   }
 
   .el-button--primary {
-    background: #165dff;
+    @include buttonStyle;
   }
 }
 </style>

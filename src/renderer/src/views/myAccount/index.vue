@@ -1,3 +1,4 @@
+// 我的账号
 <template>
   <div class="backgroundWhite">
     <div
@@ -562,9 +563,6 @@ const deleteAccount = (id?: number) => {
 
 <style lang="scss" scoped>
 .title {
-  font-family:
-    PingFang SC,
-    PingFang SC;
   font-weight: 500;
   font-size: 16px;
   color: #1d2129;
@@ -575,12 +573,9 @@ const deleteAccount = (id?: number) => {
 }
 
 .searchForm {
-  padding-left: 22px;
   padding: 20px 0 0 22px;
+
   :deep(.el-form-item__label) {
-    font-family:
-      PingFang SC,
-      PingFang SC;
     font-weight: 400;
     font-size: 14px;
     color: #4e5969;
@@ -601,9 +596,6 @@ const deleteAccount = (id?: number) => {
     height: 32px;
     border-radius: 8px 8px 8px 8px;
     font-size: 14px;
-    font-family:
-      PingFang SC,
-      PingFang SC;
     font-weight: 400;
   }
   .formLine {
@@ -630,9 +622,6 @@ const deleteAccount = (id?: number) => {
     border-radius: 8px;
   }
   .btnFont {
-    font-family:
-      PingFang SC,
-      PingFang SC;
     font-weight: 400;
     font-size: 14px;
     color: #4e5969;
@@ -660,9 +649,6 @@ const deleteAccount = (id?: number) => {
   .el-tag {
     height: 28px;
     border-radius: 2px 2px 2px 2px;
-    font-family:
-      PingFang SC,
-      PingFang SC;
     font-weight: 500;
     font-size: 14px;
     margin-left: 5px;
@@ -685,9 +671,6 @@ const deleteAccount = (id?: number) => {
     align-items: center;
     justify-content: space-between;
     .dialogTitle {
-      font-family:
-        PingFang SC,
-        PingFang SC;
       font-weight: 500;
       font-size: 20px;
       color: #1d2129;
@@ -715,9 +698,6 @@ const deleteAccount = (id?: number) => {
       // justify-content: center;
       margin-top: 10px;
       margin-bottom: 50px;
-      font-family:
-        PingFang SC,
-        PingFang SC;
       font-weight: 400;
       font-size: 18px;
       color: #2c2c2c;

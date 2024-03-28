@@ -537,9 +537,6 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 .massMailingList {
   .title {
-    font-family:
-      PingFang SC,
-      PingFang SC;
     font-weight: bold;
     font-size: 16px;
     color: #1d2129;
@@ -606,9 +603,6 @@ onBeforeUnmount(() => {
         padding: 0 5px;
       }
       .bottomTitle {
-        font-family:
-          PingFang SC,
-          PingFang SC;
         font-weight: 400;
         font-size: 14px;
         color: #000000;
@@ -638,9 +632,6 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: space-between;
     .dialogTitle {
-      font-family:
-        PingFang SC,
-        PingFang SC;
       font-weight: 500;
       font-size: 20px;
       color: #1d2129;
@@ -691,5 +682,4 @@ onBeforeUnmount(() => {
     padding-right: 20px;
   }
 }
-
 </style>

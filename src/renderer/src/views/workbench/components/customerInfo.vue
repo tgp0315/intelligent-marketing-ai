@@ -1,14 +1,12 @@
 <template>
   <div class="customerInfo">
     <div class="pic">
-      <div style="text-align: center;">
+      <div style="text-align: center">
         <el-avatar
           src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
           :size="120"
         />
-        <div style="font-size: 28px;">
-          YYWW23453
-        </div>
+        <div style="font-size: 28px">YYWW23453</div>
       </div>
     </div>
     <div class="personalDetails">
@@ -59,7 +57,9 @@
               value="客户2"
             />
           </el-select>
-          <div style="width: 18px; height: 35px; display: flex; align-items: center; cursor: pointer;">
+          <div
+            style="width: 18px; height: 35px; display: flex; align-items: center; cursor: pointer"
+          >
             <svg-icon
               v-show="item.isShow"
               name="edit"
@@ -116,7 +116,7 @@
       <!-- <div class="bigText">
           吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖吴小晖
         </div> -->
-    <!-- </div> -->
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -124,9 +124,9 @@
 <script setup lang="ts">
 import { ref, nextTick } from 'vue'
 interface PersonalDataList {
-  title: string,
-  content: string,
-  isShow: boolean,
+  title: string
+  content: string
+  isShow: boolean
   inputIsShow: boolean
 }
 const personalDataList = ref<PersonalDataList[]>([
@@ -177,7 +177,7 @@ const input = ref('')
 const inputRef = ref()
 const oldValue = ref()
 const mouseenterData = (data: any, type: string) => {
-  personalDataList.value.forEach(item => {
+  personalDataList.value.forEach((item) => {
     if (item.title === data.title) {
       if (type === 'in') {
         item.isShow = true
@@ -185,18 +185,18 @@ const mouseenterData = (data: any, type: string) => {
         item.isShow = false
       }
     }
-  });
+  })
 }
 
 const isShowInput = (data: any) => {
-  personalDataList.value.forEach(item => {
+  personalDataList.value.forEach((item) => {
     if (item.title === data.title) {
       item.inputIsShow = true
       input.value = data.content
       oldValue.value = data.content
       focusInput()
     }
-  });
+  })
 }
 
 const focusInput = () => {
@@ -206,21 +206,20 @@ const focusInput = () => {
 }
 
 const focusInputIsShow = (data: any) => {
-  personalDataList.value.forEach(item => {
+  personalDataList.value.forEach((item) => {
     if (item.title === data.title) {
       item.inputIsShow = false
       data.content = input.value
     }
-  });
+  })
 }
 
 const escInputIsShow = (data: any) => {
-
-  personalDataList.value.forEach(item => {
+  personalDataList.value.forEach((item) => {
     if (item.title === data.title) {
       input.value = oldValue.value
     }
-  });
+  })
 }
 </script>
 
@@ -232,7 +231,7 @@ const escInputIsShow = (data: any) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #E8E8E8;
+    border-bottom: 1px solid #e8e8e8;
     text-align: center;
   }
   .personalDetails {
@@ -243,7 +242,6 @@ const escInputIsShow = (data: any) => {
     .marginBottom {
       margin-bottom: 15px;
       .smollText {
-        font-family: PingFang SC, PingFang SC;
         font-weight: 400;
         font-size: 14px;
         color: #909194;
@@ -254,21 +252,12 @@ const escInputIsShow = (data: any) => {
         margin-bottom: 8px;
       }
       .bigText {
-        font-family: PingFang SC, PingFang SC;
         font-weight: 600;
         font-size: 18px;
-        color: #2C2C2C;
+        color: #2c2c2c;
         line-height: 22px;
         text-align: left;
         font-style: normal;
-        // text-transform: none;
-        // text-overflow: -o-ellipsis-lastline;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // display: -webkit-box;
-        // -webkit-line-clamp: 2;
-        // line-clamp: 2;
-        // -webkit-box-orient: vertical;
         padding-right: 40px;
       }
       .flexSpaceBetween {
