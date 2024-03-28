@@ -228,10 +228,11 @@
       <el-dialog
         v-model="dialogVisible"
         width="600"
-        top="25%"
+        top="15%"
         :close-on-press-escape="false"
         :close-on-click-modal="false"
         :show-close="false"
+        class="dialog"
       >
         <template #header>
           <div class="my-header">
@@ -271,6 +272,7 @@
         :close-on-press-escape="false"
         :close-on-click-modal="false"
         :show-close="false"
+        class="dialog"
       >
         <template #header>
           <div class="my-header">
@@ -673,23 +675,15 @@ const deleteAccount = (id?: number) => {
   justify-content: flex-end;
   // width: 100%;
   padding: 10px 0;
-  .el-pagination {
-    // width: 400px;
-    // zoom: 1;
-  }
 }
 
 ::v-deep {
-  .el-dialog__header {
-    border-bottom: 1px solid #e5e6eb;
-    font-weight: 600;
-    color: #1d2129;
-    // padding: 20px !important;
-  }
   .my-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e6eb;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 5px;
     .dialogTitle {
       font-family:
         PingFang SC,
@@ -749,6 +743,30 @@ const deleteAccount = (id?: number) => {
   }
   :deep(.el-select__wrapper) {
     box-shadow: none;
+  }
+}
+
+:deep(.dialog) {
+  padding: 0 0 16px 0;
+
+  .el-dialog__title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #1d2129;
+    line-height: 28px;
+  }
+
+  .icon {
+    cursor: pointer;
+  }
+
+  .el-dialog__body {
+    padding: 20px 30px;
+    border-bottom: 1px solid #e5e6eb;
+  }
+
+  .el-dialog__footer {
+    padding-right: 20px;
   }
 }
 </style>
