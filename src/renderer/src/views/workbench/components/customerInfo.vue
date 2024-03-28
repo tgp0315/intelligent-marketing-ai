@@ -242,9 +242,6 @@ const escInputIsShow = (data: any) => {
     .marginBottom {
       margin-bottom: 15px;
       .smollText {
-        font-family:
-          PingFang SC,
-          PingFang SC;
         font-weight: 400;
         font-size: 14px;
         color: #909194;
@@ -255,23 +252,12 @@ const escInputIsShow = (data: any) => {
         margin-bottom: 8px;
       }
       .bigText {
-        font-family:
-          PingFang SC,
-          PingFang SC;
         font-weight: 600;
         font-size: 18px;
         color: #2c2c2c;
         line-height: 22px;
         text-align: left;
         font-style: normal;
-        // text-transform: none;
-        // text-overflow: -o-ellipsis-lastline;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // display: -webkit-box;
-        // -webkit-line-clamp: 2;
-        // line-clamp: 2;
-        // -webkit-box-orient: vertical;
         padding-right: 40px;
       }
       .flexSpaceBetween {

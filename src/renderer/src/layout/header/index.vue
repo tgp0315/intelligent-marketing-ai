@@ -136,9 +136,6 @@ const setMenuFold = () => {
   }
   .title {
     font-size: 16px;
-    font-family:
-      PingFang SC-Medium,
-      PingFang SC;
     font-weight: 500;
     color: #1d2129;
   }

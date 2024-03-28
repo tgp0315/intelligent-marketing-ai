@@ -138,9 +138,6 @@ const routerSwitch = (route: string) => {
 
 .menu_font {
   font-size: 16px;
-  font-family:
-    PingFang SC-Regular,
-    PingFang SC;
   font-weight: 400;
   color: #ffffff;
   line-height: 22px;
