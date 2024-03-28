@@ -1,3 +1,4 @@
+// 群发助手任务列表
 <template>
   <div class="taskList">
     <div class="title">查询表格</div>
@@ -341,9 +342,6 @@ const tableData = ref([
   background: #fff;
   height: 100%;
   .title {
-    font-family:
-      PingFang SC,
-      PingFang SC;
     font-weight: 500;
     font-size: 16px;
     color: #1d2129;
@@ -354,12 +352,9 @@ const tableData = ref([
   }
 
   .searchForm {
-    padding-left: 22px;
     padding: 20px 0 0 22px;
+
     :deep(.el-form-item__label) {
-      font-family:
-        PingFang SC,
-        PingFang SC;
       font-weight: 400;
       font-size: 14px;
       color: #4e5969;
@@ -380,9 +375,6 @@ const tableData = ref([
       height: 32px;
       border-radius: 8px 8px 8px 8px;
       font-size: 14px;
-      font-family:
-        PingFang SC,
-        PingFang SC;
       font-weight: 400;
     }
     .formLine {
@@ -415,9 +407,6 @@ const tableData = ref([
       display: flex;
       justify-content: flex-end;
       .btnFont {
-        font-family:
-          PingFang SC,
-          PingFang SC;
         font-weight: 400;
         font-size: 14px;
         color: #4e5969;

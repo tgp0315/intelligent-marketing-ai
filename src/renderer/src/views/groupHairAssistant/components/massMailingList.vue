@@ -185,6 +185,7 @@
       :close-on-press-escape="false"
       :close-on-click-modal="false"
       :show-close="false"
+      class="dialog"
     >
       <template #header>
         <div class="my-header">
@@ -237,6 +238,7 @@
       :close-on-press-escape="false"
       :close-on-click-modal="false"
       :show-close="false"
+      class="dialog"
     >
       <template #header>
         <div class="my-header">
@@ -332,6 +334,7 @@ import { IToolbarConfig, DomEditor, Toolbar as WTEditorToolBar } from '@wangedit
 import { Plus } from '@element-plus/icons-vue'
 const radio1 = ref('1')
 const dialogVisibleAccount = ref(false)
+const dialogVisibleTemplate = ref(false)
 interface LeftTableData {
   accountInfo: string
   accountClass: string
@@ -534,9 +537,6 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 .massMailingList {
   .title {
-    font-family:
-      PingFang SC,
-      PingFang SC;
     font-weight: bold;
     font-size: 16px;
     color: #1d2129;
@@ -603,9 +603,6 @@ onBeforeUnmount(() => {
         padding: 0 5px;
       }
       .bottomTitle {
-        font-family:
-          PingFang SC,
-          PingFang SC;
         font-weight: 400;
         font-size: 14px;
         color: #000000;
@@ -622,20 +619,19 @@ onBeforeUnmount(() => {
     }
   }
 
-  :deep(.el-dialog__header) {
-    border-bottom: 1px solid #e5e6eb;
-    font-weight: 600;
-    color: #1d2129;
-    // padding: 20px !important;
-  }
+  // :deep(.el-dialog__header) {
+  //   border-bottom: 1px solid #e5e6eb;
+  //   font-weight: 600;
+  //   color: #1d2129;
+  //   // padding: 20px !important;
+  // }
   .my-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e6eb;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 5px;
     .dialogTitle {
-      font-family:
-        PingFang SC,
-        PingFang SC;
       font-weight: 500;
       font-size: 20px;
       color: #1d2129;
@@ -656,18 +652,34 @@ onBeforeUnmount(() => {
     box-shadow: none;
   }
 
-  :deep(.el-dialog__body) {
-    border-bottom: 1px solid #e5e6eb !important;
-  }
-
   .flexRight {
     display: flex;
     justify-content: flex-end;
     padding: 15px 0;
-    .el-pagination {
-      // width: 400px;
-      // zoom: 1;
-    }
+  }
+}
+
+:deep(.dialog) {
+  padding: 0 0 16px 0;
+
+  .el-dialog__title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #1d2129;
+    line-height: 28px;
+  }
+
+  .icon {
+    cursor: pointer;
+  }
+
+  .el-dialog__body {
+    padding: 20px 30px;
+    border-bottom: 1px solid #e5e6eb;
+  }
+
+  .el-dialog__footer {
+    padding-right: 20px;
   }
 }
 </style>

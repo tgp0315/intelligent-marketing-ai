@@ -27,6 +27,13 @@ export default defineConfig({
           '@': resolve('src/renderer/src')
         }
       },
+      css: {
+        preprocessorOptions: {
+          scss: {
+            additionalData: '@import "@/assets/common.scss";'
+          }
+        }
+      },
       esbuild: {
         pure: ['console.log'],
         drop: ['debugger'],

@@ -48,9 +48,6 @@ const handleClick = () => {
     background-color: #fff;
     padding: 12px 20px;
     :deep(.el-tabs__item) {
-      font-family:
-        PingFang SC,
-        PingFang SC;
       font-weight: 500;
       font-size: 16px;
       color: #909194;
@@ -62,9 +59,6 @@ const handleClick = () => {
       background-color: transparent !important;
     }
     :deep(.el-tabs__item.is-active) {
-      font-family:
-        PingFang SC,
-        PingFang SC;
       font-weight: 600;
       font-size: 16px;
       color: #1966ff;

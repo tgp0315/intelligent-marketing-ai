@@ -4,7 +4,15 @@
       class="message_tabs"
       :tab-list="tabList"
     />
-    <div class="chat">对话区</div>
+    <div
+      id="svgBox"
+      class="chat"
+    >
+      <header-com :chat="chat" />
+      <chat-win />
+      <div class="svgResize" />
+      <editor />
+    </div>
     <FunctionalDomain />
   </div>
 </template>
@@ -15,12 +23,38 @@ import dialogue from './components/dialogue.vue'
 import addressBook from './components/addressBook.vue'
 import group from './components/group.vue'
 import FunctionalDomain from './components/functionalDomain.vue'
-import type { Component } from 'vue'
+import HeaderCom from './components/header.vue'
+import ChatWin from './components/chatwin.vue'
+import Editor from './components/editor.vue'
+import { reactive, type Component } from 'vue'
 interface TabList {
   key: string
   label: string
   component: Component | string
 }
+interface Chat {
+  type: string
+  avatar?: string
+  name?: string
+  amount?: number
+}
+// const config = reactive({
+//   content: 'Element Plus',
+//   font: {
+//     fontSize: 16,
+//     color: 'rgba(0, 0, 0, 0.15)',
+//   },
+//   zIndex: 0,
+//   rotate: -22,
+//   gap: [100, 100] ,
+//   offset: [],
+// })
+const chat = reactive<Chat>({
+  type: 'personal',
+  avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+  name: '张三',
+  amount: 100
+})
 const tabList: TabList[] = [
   {
     key: 'huihua',
@@ -66,6 +100,18 @@ const tabList: TabList[] = [
   }
   .chat {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .svgResize {
+    position: relative;
+    height: 5px;
+    width: 100%;
+    cursor: row-resize;
+    font-size: 12px;
+    background: reg(27, 27, 27);
   }
 }
 </style>

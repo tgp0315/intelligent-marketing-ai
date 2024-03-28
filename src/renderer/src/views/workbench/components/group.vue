@@ -1,341 +1,216 @@
 // 群组
 <template>
-  <div class="addressBook">
-    <el-input
-      v-model="value"
-      style="width: 290px"
-      placeholder="请输入关键词"
-      :suffix-icon="Search"
-    />
-    <el-button
-      link
-      @click="clickAll"
-    >
-      全部收起
-    </el-button>
-    <div class="collapse">
-      <el-collapse
-        v-model="activeNames"
-        @change="handleChange"
+  <div class="groupMarketing">
+    <div class="box">
+      <div class="verbaltrick">
+        <span class="title">选择客户</span>
+      </div>
+      <el-table
+        v-if="clientList.length"
+        :data="clientList"
+        style="width: 100%"
+        max-height="220"
+        :cell-class-name="cellClassName"
       >
-        <el-collapse-item
-          v-for="(item, t) in accountList"
-          :key="item.account"
-          :name="item.account"
-        >
-          <template #title>
-            <div class="title">
-              <svg-icon
-                class="user"
-                :icon-style="iconStyle"
-                :name="activeNames.includes(item.account) ? 'user' : 'unselecteduser'"
-              />
-              <span
-                class="account"
-                :class="{ selected: activeNames.includes(item.account) }"
-                >{{ item.account }}</span
-              >
-            </div>
-            <svg-icon
-              :icon-style="iconStyle"
-              :name="activeNames.includes(item.account) ? 'up' : 'down'"
-            />
-          </template>
-          <template v-if="item.children">
-            <div
-              v-for="(info, index) in item.children"
-              :key="`${item.account}-${info.account}`"
-              class="personage"
-              :class="{ selected: info.isSelected }"
-              @click="selectedUser(t, index)"
-            >
-              <div class="info">
-                <el-avatar
-                  :size="40"
-                  src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-                />
-                <div class="user">
-                  {{ info.nickname }}
-                </div>
-              </div>
-            </div>
-          </template>
-          <!-- <div>
-            Consistent with real life: in line with the process and logic of real
-            life, and comply with languages and habits that the users are used to;
-          </div>
-          <div>
-            Consistent within interface: all elements should be consistent, such
-            as: design style, icons and texts, position of elements, etc.
-          </div> -->
-        </el-collapse-item>
-      </el-collapse>
+        <el-table-column
+          type="selection"
+          width="30"
+        />
+        <el-table-column
+          type="index"
+          class="serial"
+          width="50"
+        />
+        <el-table-column
+          prop="account"
+          width="100"
+          show-overflow-tooltip
+        />
+        <el-table-column
+          prop="content"
+          width="160"
+          show-overflow-tooltip
+        />
+      </el-table>
+    </div>
+    <div class="box">
+      <div class="verbaltrick">
+        <span class="title">选择我的账号</span>
+      </div>
+      <el-table
+        v-if="clientList.length"
+        :data="clientList"
+        style="width: 100%"
+        max-height="220"
+        :cell-class-name="cellClassName"
+      >
+        <el-table-column
+          type="selection"
+          width="30"
+        />
+        <el-table-column
+          type="index"
+          class="serial"
+          width="50"
+        />
+        <el-table-column
+          prop="account"
+          width="100"
+          show-overflow-tooltip
+        />
+        <el-table-column
+          prop="content"
+          width="160"
+          show-overflow-tooltip
+        />
+      </el-table>
+    </div>
+    <div class="box">
+      <div class="verbaltrick">
+        <span class="title">确定群组名称</span>
+      </div>
+      <div class="new_chat">
+        <el-input
+          v-model="confirmName"
+          :rows="2"
+          placeholder="请输入群组名称"
+        />
+        <el-button type="primary"> 添加群组 </el-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Search } from '@element-plus/icons-vue'
-// import Svguser from '@/assets/icons/user.svg'
-import { ref, reactive } from 'vue'
-const value = ref('')
-const activeNames = ref([] as Array<string>)
-const accountList = reactive([
+import { reactive, ref } from 'vue'
+
+const confirmName = ref('')
+const clientList = reactive([
   {
-    account: 'flb1116@gmail.com',
-    isCollapse: false,
-    unread: 1,
-    children: [
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      },
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      },
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      },
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      }
-    ]
+    id: 1,
+    account: '客户账号a',
+    content: '客户来源描述'
   },
   {
-    account: 'flb1117@gmail.com',
-    isCollapse: false,
-    children: [
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      },
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      },
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      },
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      },
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      },
-      {
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        account: 'flb1116@gmail.com',
-        nickname: '张三',
-        isSelected: false,
-        chatId: 1711078211014
-      }
-    ]
+    id: 1,
+    account: '客户账号a',
+    content: '客户来源描述'
+  },
+  {
+    id: 1,
+    account: '客户账号a',
+    content: '客户来源描述'
+  },
+  {
+    id: 1,
+    account: '客户账号a',
+    content: '客户来源描述'
+  },
+  {
+    id: 1,
+    account: '客户账号a',
+    content: '客户来源描述'
+  },
+  {
+    id: 1,
+    account: '客户账号a',
+    content: '客户来源描述'
+  },
+  {
+    id: 1,
+    account: '客户账号a',
+    content: '客户来源描述'
   }
 ])
-const iconStyle = {
-  width: 18,
-  height: 18
-}
-const handleChange = (val: string[]) => {
-  console.log(val)
-}
 
-const selectedUser = (t: number, n: number): void => {
-  accountList.forEach((item) => {
-    const { children } = item
-    if (children && children.length) {
-      children.forEach((item) => {
-        item.isSelected = false
-      })
-    }
-  })
-  accountList[t].children[n].isSelected = true
-}
-
-const clickAll = () => {
-  activeNames.value = []
+const cellClassName = ({ columnIndex }) => {
+  if (columnIndex === 1) {
+    return 'serial'
+  }
+  return ''
 }
 </script>
 
 <style lang="scss">
-.addressBook {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #ffffff;
+.groupMarketing {
+  .box {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #e8e8e8;
 
-  .el-input {
-    margin-top: 10px;
-    height: 32px;
+    &.last {
+      border: none;
+    }
+    .verbaltrick {
+      padding: 20px 0 0 0;
+    }
   }
 
-  .el-input__wrapper {
-    height: 32px;
-    background: #f2f3f5;
-    border-radius: 24px 24px 24px 24px;
-  }
-
-  .is-link {
-    height: 28px;
-    margin: 8px 22px 8px 0;
-    align-self: self-end;
-    font-weight: 400;
-    font-size: 14px;
-    color: #2c2c2c;
-    line-height: 22px;
-    text-align: left;
-    font-style: normal;
-  }
-
-  .el-collapse-item__arrow {
+  .el-table__header-wrapper {
     display: none;
   }
-
-  .collapse {
-    width: 100%;
-    flex: 1;
-    height: 100%;
-  }
-
-  .el-collapse {
+  .el-table td.el-table__cell,
+  .el-table th.el-table__cell.is-leaf {
     border: none;
-    height: 100%;
-    overflow: auto;
-
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 5px;
-    }
   }
 
-  .el-collapse-item__content {
+  .el-table__inner-wrapper::before {
+    height: 0;
+  }
+
+  .el-table {
+    transform: scale(1);
+    transform-origin: 0 0;
+    margin-top: 10px;
+  }
+
+  .el-tab-pane {
     padding: 0;
   }
 
-  .el-collapse-item__wrap {
-    border: none;
-  }
-
-  .el-collapse-item__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
-    border: none;
-    padding: 0 20px 0 12px;
-
-    .title {
-      display: flex;
-      align-items: center;
-    }
-
-    .account {
-      margin-left: 16px;
-      font-weight: 400;
-      font-size: 14px;
-      color: #2c2c2c;
-      line-height: 22px;
-      text-align: left;
-
-      &.selected {
+  .serial {
+    .cell {
+      div {
+        background: #e8f3ff;
+        border-radius: 2px 2px 2px 2px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 12px;
         color: #165dff;
       }
     }
   }
-  .unread {
-    width: 16px;
-    height: 16px;
-    background: #ff4433;
-    border-radius: 50px 50px 50px 50px;
-    font-weight: 500;
-    font-size: 11px;
-    color: #ffffff;
-    line-height: 16px;
-    text-align: center;
-    margin-left: 8px;
-  }
 
-  .personage {
+  .title {
+    font-weight: 500;
+    font-size: 16px;
+    color: #1d2129;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: ' ';
+      height: 20px;
+      padding: 2px;
+      background: linear-gradient(180deg, #81affe 0%, #5691fe 16%, #1b68ff 100%);
+      border-radius: 99px 99px 99px 99px;
+      margin-right: 4px;
+    }
+  }
+  .new_chat {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 17px 21px;
-    border-radius: 2px 2px 2px 2px;
-    cursor: pointer;
+    margin-top: 20px;
 
-    &.selected {
-      background: #f7f8fa;
-    }
-
-    &:hover {
-      background: #f7f8fa;
+    .el-button--primary {
+      margin-left: 20px;
+      @include buttonStyle;
     }
   }
 
-  .info {
-    display: flex;
-    align-items: center;
-
-    .user {
-      color: #2c2c2c;
-      margin-left: 10px;
-      display: flex;
-      flex-direction: column;
-      font-weight: 400;
-      font-size: 16px;
-    }
-  }
-  .other {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-  }
-
-  .time {
-    font-size: 14px;
-    color: #9f9f9f;
-    line-height: 22px;
-    margin-bottom: 6px;
+  .el-input__wrapper {
+    box-shadow: none;
+    background-color: #f2f3f5;
   }
 }
 </style>

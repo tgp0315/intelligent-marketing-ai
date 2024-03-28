@@ -341,9 +341,6 @@ onUnmounted(() => {
     border-radius: 51px 51px 51px 51px;
     width: 120px;
     font-size: 14px;
-    font-family:
-      Alibaba PuHuiTi-Regular,
-      Alibaba PuHuiTi;
     font-weight: 400;
     color: #165dff;
   }

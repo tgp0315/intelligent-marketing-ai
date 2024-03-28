@@ -32,13 +32,8 @@
           width="50"
         />
         <el-table-column
-          prop="title"
-          width="90"
-          show-overflow-tooltip
-        />
-        <el-table-column
           prop="content"
-          width="150"
+          width="250"
           show-overflow-tooltip
         />
         <el-table-column
@@ -64,8 +59,18 @@
         >
           添加分类
         </el-button>
-        <el-button class="verbaltrick_btn"> 添加话术 </el-button>
-        <el-button class="verbaltrick_btn"> 导入话术 </el-button>
+        <el-button
+          class="verbaltrick_btn"
+          @click="addSpeech"
+        >
+          添加话术
+        </el-button>
+        <el-button
+          class="verbaltrick_btn"
+          @click="importSpeech"
+        >
+          导入话术
+        </el-button>
       </div>
     </div>
     <div class="box">
@@ -164,13 +169,131 @@
         </el-button>
       </template>
     </el-dialog>
+
+    <el-dialog
+      v-if="speechVisible"
+      v-model="speechVisible"
+      width="600"
+      :close-on-click-modal="false"
+      title="添加话术"
+      append-to-body
+      :show-close="false"
+      class="workspace_dialog"
+    >
+      <template #header="{ close }">
+        <span class="el-dialog__title">添加话术</span>
+        <svg-icon
+          class="icon"
+          name="closeCircle"
+          @click="close"
+        />
+      </template>
+      <el-form
+        ref="speechFormRef"
+        :model="speechForm"
+        :rules="speechRules"
+        label-width="auto"
+        class="demo-ruleForm"
+        :size="formSize"
+        status-icon
+      >
+        <el-form-item
+          label="所属分类"
+          prop="type"
+        >
+          <el-select
+            v-model="speechForm.type"
+            placeholder="请选择"
+          >
+            <el-option
+              label="类别1"
+              :value="1"
+            />
+            <el-option
+              label="类别2"
+              :value="2"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          label="话术内容"
+          prop="content"
+        >
+          <el-input
+            v-model="speechForm.content"
+            placeholder="请输入"
+            type="textarea"
+          />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="closeDialog('添加话术')"> 取消 </el-button>
+        <el-button
+          type="primary"
+          @click="submitSpeechForm('添加话术')"
+        >
+          确定
+        </el-button>
+      </template>
+    </el-dialog>
+
+    <el-dialog
+      v-if="importSpeechVisible"
+      v-model="importSpeechVisible"
+      width="500"
+      :close-on-click-modal="false"
+      title="导入话术"
+      append-to-body
+      :show-close="false"
+      class="workspace_dialog"
+    >
+      <template #header="{ close }">
+        <span class="el-dialog__title">导入话术</span>
+        <svg-icon
+          class="icon"
+          name="closeCircle"
+          @click="close"
+        />
+      </template>
+      <div class="center">
+        <el-button
+          type="primary"
+          style="margin-bottom: 15px"
+        >
+          下载模板
+        </el-button>
+        <el-upload
+          ref="uploadRef"
+          class="upload-demo"
+          action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+          :auto-upload="false"
+          :multiple="false"
+          :limit="1"
+          :file-list="fileList"
+          :on-change="changeFile"
+        >
+          <template #trigger>
+            <el-button type="primary"> 选择文件 </el-button>
+          </template>
+        </el-upload>
+      </div>
+      <template #footer>
+        <el-button @click="closeDialog('导入话术')"> 取消 </el-button>
+        <el-button
+          type="primary"
+          @click="submitUpload('导入话术')"
+        >
+          确定
+        </el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { ArrowDown } from '@element-plus/icons-vue'
-import type { FormInstance, FormRules } from 'element-plus'
+import type { FormInstance, FormRules, UploadInstance } from 'element-plus'
 interface TabList {
   label: string
   name: number
@@ -200,38 +323,56 @@ const tabList = ref<TabList[]>([
 
 const formSize = ref('default')
 
+const fileList = ref([])
 interface RuleForm {
   name: string
 }
 
+interface SpeechForm {
+  type: number
+  content: string
+}
+
 const ruleFormRef = ref<FormInstance>()
+const speechFormRef = ref<FormInstance>()
+const uploadRef = ref<UploadInstance>()
 
 const ruleForm = reactive<RuleForm>({
   name: ''
+})
+const speechForm = reactive<SpeechForm>({
+  type: 1,
+  content: ''
 })
 
 const rules = reactive<FormRules<RuleForm>>({
   name: [{ required: true, message: '请输入分类名称', trigger: 'blur' }]
 })
+const speechRules = reactive<FormRules<SpeechForm>>({
+  type: [{ required: true, message: '请选择分类', trigger: 'blur' }],
+  content: [{ required: true, message: '请输入话术内容', trigger: 'blur' }]
+})
 const activeName = ref(1)
 const language = ref('英语')
 const textarea = ref('')
 const classifyVisible = ref(false)
+const speechVisible = ref(false)
+const importSpeechVisible = ref(false)
 const translation = ref('')
 const verbaltrickList = reactive([
   {
     title: '标题就这么长',
-    content: '我是话术内容话术内容话术十多个点',
+    content: '我是话术内容话术内容话术十多个点qwerverververv',
     id: 1
   },
   {
     title: '标题就这么长',
-    content: '我是话术内容话术内容话术十多个点',
+    content: '我是话术内容话术内容话术十多个点aervaervqevr',
     id: 2
   },
   {
     title: '标题就这么长',
-    content: '我是话术内容话术内容话术十多个点',
+    content: '我是话术内容话术内容话术十多个点qervqwevrqvr',
     id: 3
   }
 ])
@@ -248,18 +389,33 @@ const addClassify = () => {
   classifyVisible.value = true
 }
 
+const addSpeech = () => {
+  speechVisible.value = true
+}
+
+const importSpeech = () => {
+  importSpeechVisible.value = true
+}
+
 const command = (val) => {
   language.value = val === 'en' ? '英语' : '中文'
 }
 
-const closeDialog = (type) => {
+const closeDialog = (type: string) => {
   switch (type) {
     case '分类':
       classifyVisible.value = false
+      return
+    case '添加话术':
+      speechVisible.value = false
+      return
+    case '导入话术':
+      importSpeechVisible.value = false
+      return
   }
 }
 
-const submitForm = async (type) => {
+const submitForm = async (type: string) => {
   if (!ruleFormRef.value) return
   await ruleFormRef.value.validate((valid, fields) => {
     if (valid) {
@@ -269,6 +425,29 @@ const submitForm = async (type) => {
       console.log('error submit!', fields)
     }
   })
+}
+
+const submitSpeechForm = async (type: string) => {
+  if (!speechFormRef.value) return
+  await speechFormRef.value.validate((valid, fields) => {
+    if (valid) {
+      console.log('submit!')
+      closeDialog(type)
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
+}
+
+const changeFile = (file) => {
+  const dataFile = new FormData()
+  dataFile.append('file', file.raw)
+  console.log(file.raw, fileList, dataFile)
+}
+
+const submitUpload = (type: string) => {
+  uploadRef.value!.submit()
+  closeDialog(type)
 }
 
 const handleClick = () => {
@@ -387,14 +566,7 @@ const selected = (index, row) => {
     max-height: 217px;
     overflow: auto;
 
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 5px;
-    }
+    @include scrollBar;
   }
 
   .verbaltrick_btn {
@@ -410,10 +582,12 @@ const selected = (index, row) => {
   }
 
   .el-textarea__inner {
-    background: #f2f3f5;
+    background: $textareaBgColor;
     border-radius: 8px 8px 8px 8px;
     height: 76px;
     box-shadow: 0 0 0 0px !important;
+
+    @include scrollBar;
   }
 
   .action {
@@ -440,8 +614,7 @@ const selected = (index, row) => {
   }
 
   .el-button--primary {
-    background: #165dff;
-    border-radius: 8px 8px 8px 8px;
+    @include buttonStyle;
 
     &.is-link {
       background: transparent;
@@ -455,12 +628,23 @@ const selected = (index, row) => {
 
     .el-button--primary {
       margin-left: 20px;
+      @include buttonStyle;
     }
   }
 }
 
+.el-overlay-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .workspace_dialog {
   padding: 0 0 16px 0;
+
+  .center {
+    text-align: center;
+  }
 
   .el-dialog__title {
     font-weight: 500;
@@ -486,18 +670,12 @@ const selected = (index, row) => {
     border-bottom: 1px solid #e5e6eb;
   }
 
-  .el-overlay-dialog {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .el-dialog__footer {
     padding-right: 20px;
   }
 
   .el-button--primary {
-    background: #165dff;
+    @include buttonStyle;
   }
 }
 </style>
