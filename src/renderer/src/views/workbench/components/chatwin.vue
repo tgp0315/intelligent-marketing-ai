@@ -47,7 +47,7 @@
               <el-avatar
                 v-contextmenu:contextmenu
                 :size="36"
-                shape="square"
+                shape="circle"
                 :src="item.avatar || circleUrl"
                 @error="() => true"
               >

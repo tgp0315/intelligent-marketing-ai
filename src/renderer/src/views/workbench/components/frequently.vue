@@ -566,14 +566,7 @@ const selected = (index, row) => {
     max-height: 217px;
     overflow: auto;
 
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #ccc;
-      border-radius: 5px;
-    }
+    @include scrollBar;
   }
 
   .verbaltrick_btn {
@@ -589,10 +582,12 @@ const selected = (index, row) => {
   }
 
   .el-textarea__inner {
-    background: #f2f3f5;
+    background: $textareaBgColor;
     border-radius: 8px 8px 8px 8px;
     height: 76px;
     box-shadow: 0 0 0 0px !important;
+
+    @include scrollBar;
   }
 
   .action {
@@ -638,8 +633,15 @@ const selected = (index, row) => {
   }
 }
 
+.el-overlay-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .workspace_dialog {
   padding: 0 0 16px 0;
+
   .center {
     text-align: center;
   }
@@ -666,12 +668,6 @@ const selected = (index, row) => {
   .el-dialog__body {
     padding: 40px 60px;
     border-bottom: 1px solid #e5e6eb;
-  }
-
-  .el-overlay-dialog {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .el-dialog__footer {

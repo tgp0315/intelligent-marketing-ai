@@ -29,52 +29,67 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <el-button>添加跟进记录</el-button>
+      <el-button @click="addRecord"> 添加跟进记录 </el-button>
     </div>
-    <!-- <div class="message-info-views">
-      <p v-if="currentType">
-        <span
-          v-if="chatType('C2C')"
-          class="single"
-          @click="openUser"
-        >
-          {{ chatNick("C2C", chat) }}
-        </span>
-        <span
-          v-else-if="chatType('GROUP')"
-          class="group"
-          @click="openSetup"
-        >
-          {{ chatNick("GROUP", chat) }}
-        </span>
-        <span
-          v-else-if="chatType('@TIM#SYSTEM')"
-          class="system"
-        > 系统通知 </span>
-      </p>
-    </div>
-    <div class="flex">
-      <div
-        v-show="chat.type == 'GROUP' && false"
-        class="message-info-add"
-        title="添加成员"
-      >
+    <el-dialog
+      v-if="recordVisible"
+      v-model="recordVisible"
+      width="700"
+      :close-on-click-modal="false"
+      append-to-body
+      :show-close="false"
+      class="record_dialog"
+    >
+      <template #header="{ close }">
+        <span class="el-dialog__title">跟进记录</span>
         <svg-icon
-          name="group"
+          class="icon"
+          name="closeCircle"
+          @click="close"
         />
-      </div> -->
-    <!-- <div
-        v-show="chat.type == 'GROUP'"
-        class="message-info-setup"
-        title="设置"
-        @click="openSetup"
+      </template>
+      <div class="list">
+        <div
+          v-for="(item, index) in recordList"
+          :key="item.id"
+          class="sub"
+          :class="[JadgeOddEven(index) ? 'right' : 'left']"
+        >
+          <span class="content">{{ item.content }}</span>
+          <span class="date">{{ item.date }}</span>
+          <span class="followPerson">跟进人：{{ item.followPerson }}</span>
+        </div>
+      </div>
+      <el-form
+        ref="recordFormRef"
+        :model="recordForm"
+        label-width="auto"
+        class="demo-ruleForm"
+        :size="formSize"
+        status-icon
       >
-        <FontIcon
-          icon-name="MoreFilled"
-          class="icon-hover"
-        />
-      </div> -->
-    <!-- </div> -->
+        <el-form-item
+          label="添加跟进记录"
+          prop="content"
+        >
+          <el-input
+            v-model="recordForm.content"
+            placeholder="详细说明更新信息"
+            rows="3"
+            type="textarea"
+          />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="closeDialog"> 取消 </el-button>
+        <el-button
+          type="primary"
+          @click="submitForm"
+        >
+          确定
+        </el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -88,6 +103,13 @@ interface Chat {
   amount?: number
 }
 
+interface Record {
+  content: string
+  followPerson: string
+  date: string
+  id: number
+}
+
 interface Props {
   chat?: Chat
 }
@@ -95,43 +117,70 @@ interface Props {
 defineProps<Props>()
 const isOpen = ref(false)
 const language = ref('英语')
+const recordVisible = ref(true)
+const formSize = ref('default')
+interface RecordForm {
+  content: string
+}
 
+const recordList = ref<Record[]>([
+  {
+    content: '主要更加信息内容主要更加信息内容主要更加信息内容',
+    followPerson: '吴晓辉',
+    date: '2024-03-12',
+    id: 1
+  },
+  {
+    content: '主要更加信息内容主要更加信息内容主要更加信息内容',
+    followPerson: '吴晓辉',
+    date: '2024-03-12',
+    id: 2
+  },
+  {
+    content: '主要更加信息内容主要更加信息内容主要更加信息内容',
+    followPerson: '吴晓辉',
+    date: '2024-03-12',
+    id: 3
+  },
+  {
+    content: '主要更加信息内容主要更加信息内容主要更加信息内容',
+    followPerson: '吴晓辉',
+    date: '2024-03-12',
+    id: 4
+  },
+  {
+    content: '主要更加信息内容主要更加信息内容主要更加信息内容',
+    followPerson: '吴晓辉',
+    date: '2024-03-12',
+    id: 5
+  }
+])
+const recordFormRef = ref()
+const recordForm = ref<RecordForm>({
+  content: ''
+})
 const command = (val) => {
   language.value = val === 'en' ? '英语' : '中文'
 }
-// import { useState, useGetters } from "@/utils/hooks/useMapper";
-// import { useStore } from "vuex";
 
-// const { commit } = useStore();
-// const { currentType } = useGetters(["currentType"]);
-// const { chat, groupProfile } = useState({
-//   groupProfile: (state) => state.groupinfo.groupProfile,
-//   chat: (state) => state.conversation.currentConversation,
-// });
+const addRecord = () => {
+  recordVisible.value = true
+}
 
-// const chatType = (type) => {
-//   return currentType.value === type;
-// };
+const JadgeOddEven = (index) => {
+  return index % 2 === 0
+}
 
-// const chatNick = (type, chat) => {
-//   if (type === "C2C") {
-//     return chat.userProfile.nick || chat.userProfile.userID || chat.remark;
-//   } else if (type === "GROUP") {
-//     const {
-//       groupProfile: { name, groupID, memberCount },
-//     } = chat;
-//     const count = memberCount ? `(${memberCount})` : "";
-//     return `${name || groupID} ${count}`;
-//   }
-// };
+const closeDialog = () => {
+  recordVisible.value = false
+}
 
-// const openSetup = () => {
-//   commit("EMITTER_EMIT", { key: "onGroupDrawer", value: true });
-// };
-// const openUser = () => {};
+const submitForm = () => {
+  closeDialog()
+}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .message-info-view-header {
   height: 80px;
   background: #ffffff;
@@ -183,6 +232,116 @@ const command = (val) => {
     color: #165dff;
     border-radius: 2px 2px 2px 2px;
     margin-left: 20px;
+  }
+}
+.record_dialog {
+  padding: 0 0 16px 0;
+  .center {
+    text-align: center;
+  }
+
+  .el-dialog__title {
+    font-weight: 500;
+    font-size: 20px;
+    color: #1d2129;
+    line-height: 28px;
+  }
+
+  .icon {
+    cursor: pointer;
+  }
+
+  .el-dialog__header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e6eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .el-dialog__body {
+    padding: 30px 50px 37px;
+    border-bottom: 1px solid #e5e6eb;
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-height: 300px;
+    overflow: auto;
+    margin-bottom: 30px;
+
+    @include scrollBar;
+  }
+
+  .sub {
+    display: flex;
+    // align-items: start;
+    flex-direction: column;
+    position: relative;
+    padding: 10px 0;
+    font-weight: 400;
+    font-size: 12px;
+    color: #86909c;
+    line-height: 20px;
+
+    &.right {
+      // align-self: flex-end;
+      margin-left: 226px;
+      padding-left: 18px;
+      border-left: 1px solid #e5e6eb;
+
+      &::before {
+        content: ' ';
+        width: 6px;
+        height: 6px;
+        background: #165dff;
+        position: absolute;
+        left: -3px;
+        top: 18px;
+        border-radius: 100px 100px 100px 100px;
+      }
+    }
+
+    &.left {
+      margin-right: 226px;
+      text-align: right;
+      padding-right: 18px;
+      border-right: 1px solid #e5e6eb;
+
+      &::before {
+        content: ' ';
+        width: 6px;
+        height: 6px;
+        background: #165dff;
+        position: absolute;
+        right: -3px;
+        top: 18px;
+        border-radius: 100px 100px 100px 100px;
+      }
+    }
+
+    .content {
+      width: 208px;
+      font-size: 14px;
+      color: #1d2129;
+      line-height: 22px;
+    }
+  }
+
+  .el-dialog__footer {
+    padding-right: 20px;
+  }
+
+  .el-button--primary {
+    background: #165dff;
+  }
+
+  .el-textarea__inner {
+    background: $textareaBgColor;
+
+    @include scrollBar;
   }
 }
 </style>

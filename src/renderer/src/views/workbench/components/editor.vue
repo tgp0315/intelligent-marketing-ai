@@ -462,18 +462,7 @@ onBeforeUnmount(() => {
       overflow: visible;
     }
     :deep(.w-e-scroll) {
-      &::-webkit-scrollbar-track-piece {
-        background: #fff;
-      }
-
-      &::-webkit-scrollbar {
-        width: 6px;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background: #90939957;
-        border-radius: 20px;
-      }
+      @include scrollBar;
     }
   }
 }
