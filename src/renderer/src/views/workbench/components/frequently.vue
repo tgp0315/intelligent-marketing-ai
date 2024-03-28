@@ -614,8 +614,7 @@ const selected = (index, row) => {
   }
 
   .el-button--primary {
-    background: #165dff;
-    border-radius: 8px 8px 8px 8px;
+    @include buttonStyle;
 
     &.is-link {
       background: transparent;
@@ -629,6 +628,7 @@ const selected = (index, row) => {
 
     .el-button--primary {
       margin-left: 20px;
+      @include buttonStyle;
     }
   }
 }
@@ -675,7 +675,7 @@ const selected = (index, row) => {
   }
 
   .el-button--primary {
-    background: #165dff;
+    @include buttonStyle;
   }
 }
 </style>

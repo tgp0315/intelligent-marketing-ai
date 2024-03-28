@@ -335,7 +335,7 @@ const submitForm = () => {
   }
 
   .el-button--primary {
-    background: #165dff;
+    @include buttonStyle;
   }
 
   .el-textarea__inner {

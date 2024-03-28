@@ -38,6 +38,17 @@ interface Chat {
   name?: string
   amount?: number
 }
+// const config = reactive({
+//   content: 'Element Plus',
+//   font: {
+//     fontSize: 16,
+//     color: 'rgba(0, 0, 0, 0.15)',
+//   },
+//   zIndex: 0,
+//   rotate: -22,
+//   gap: [100, 100] ,
+//   offset: [],
+// })
 const chat = reactive<Chat>({
   type: 'personal',
   avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',

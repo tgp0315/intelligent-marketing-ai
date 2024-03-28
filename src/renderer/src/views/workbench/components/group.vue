@@ -204,6 +204,7 @@ const cellClassName = ({ columnIndex }) => {
 
     .el-button--primary {
       margin-left: 20px;
+      @include buttonStyle;
     }
   }
 

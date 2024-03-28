@@ -18,4 +18,9 @@
   }
 }
 
+@mixin buttonStyle {
+  background: #165dff;
+  border-radius: 8px 8px 8px 8px;
+}
+
 $textareaBgColor: #f2f3f5

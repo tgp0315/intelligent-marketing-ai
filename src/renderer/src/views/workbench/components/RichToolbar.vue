@@ -301,8 +301,7 @@ const setEmoji = (item) => {
   .el-button--primary {
     width: 82px;
     height: 28px;
-    background: #165dff;
-    border-radius: 8px 8px 8px 8px;
+    @include buttonStyle;
   }
   .robot {
     stroke: unset;

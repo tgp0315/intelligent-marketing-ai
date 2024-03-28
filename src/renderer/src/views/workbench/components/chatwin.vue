@@ -142,6 +142,7 @@ import { circleUrl } from '../utils/menu'
 // import { getMsgList } from "@/api/im-sdk-api/index";
 // import { deleteMsgList, revokeMsg, translateText, getMsgList } from "@/api/im-sdk-api/index";
 import emitter from '@/utils/mitt-bus'
+
 const group = true
 // import NameComponent from "./NameComponent.vue"
 import { timeFormat } from '@/utils/chat/index'
@@ -158,6 +159,7 @@ import ImageElemItem from '../ElemItemTypes/ImageElemItem.vue'
 // const timeout = ref(false);
 // const isRight = ref(true);
 // const MenuItemInfo = ref([]);
+
 const scrollbarRef = ref(null)
 const messageViewRef = ref(null)
 const currentMessageList = reactive([
@@ -634,8 +636,8 @@ defineExpose({ updateScrollBarHeight })
   max-height: 20px;
   text-align: center;
   font-weight: 400;
-  font-size: 12px;
-  color: var(--color-time-divider);
+  font-size: 14px;
+  color: #9f9f9f;
 }
 .message-view {
   display: flex;
